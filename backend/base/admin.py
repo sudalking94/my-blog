@@ -29,6 +29,7 @@ class PostCommentAdmin(admin.ModelAdmin):
         "createdAt",
         "updatedAt",
     )
+    search_fields = ("post__title",)
 
 @admin.register(PostCategory)
 class PostCategoryAdmin(admin.ModelAdmin):
