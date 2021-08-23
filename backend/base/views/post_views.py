@@ -21,7 +21,7 @@ def getPosts(request):
     serializer = PostSerializer(posts, many=True)
     return Response(
         {"posts": serializer.data,"page":page,"pages":paginator.num_pages}
-    )
+    ) 
 
 @api_view(["GET"])
 def getPostById(request, pk):
