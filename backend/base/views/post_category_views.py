@@ -5,7 +5,7 @@ from base.models import PostCategory
 
 @api_view(["GET"])
 def getPostCategories(request):
-    postCategories = PostCategory.objects.all()        
+    postCategories = PostCategory.objects.all()    
     serializer = PostCategorySerializer(postCategories, many=True)
     return Response(
         {"post-category": serializer.data}
