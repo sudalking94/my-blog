@@ -1,6 +1,6 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import Post, Category, PostCategory, PostComment
+from .models import Post, Category, PostComment
 
 class PostSerializer(serializers.ModelSerializer):
     comments = serializers.SerializerMethodField(read_only=True)
@@ -14,16 +14,12 @@ class PostSerializer(serializers.ModelSerializer):
         return serializer.data
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategorySerializer(serializers.ModelSerializer):    
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ["_id","title"]
+    
 
-
-class PostCategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PostCategory
-        fields = "__all__"        
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:

@@ -7,6 +7,7 @@ class Post(TimeStammpedModel):
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=100, null=False, blank=False)    
     content = models.TextField(null=False, blank=False)
+    category = models.ForeignKey("Category",on_delete=models.CASCADE,default=1)
 
     def __str__(self):
         return self.title
@@ -28,11 +29,4 @@ class Category(TimeStammpedModel):
     def __str__(self):
         return self.title
 
-class PostCategory(TimeStammpedModel):
-    _id = models.AutoField(primary_key=True,auto_created=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    post = models.OneToOneField(Post, on_delete=models.CASCADE)    
-
-    def __str__(self):        
-        return str(self.category)
 
