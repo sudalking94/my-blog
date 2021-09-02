@@ -7,15 +7,18 @@ from base.models import Post
 
 @api_view(["GET"])
 def getPosts(request):
+    search = request.query_params.get("search")
+    if search ==None:
+        search =""
     try:
         categoryId = int(request.query_params.get("category"))
     except (ValueError,TypeError):
         categoryId = None
     page = request.query_params.get("page")    
     if categoryId is not None:
-        posts = Post.objects.filter(category=categoryId)        
+        posts = Post.objects.filter(category=categoryId)
     else:
-        posts = Post.objects.all()
+        posts = Post.objects.filter(title__icontains=search)
     paginator = Paginator(posts,4)
     try:
         posts = paginator.page(page)

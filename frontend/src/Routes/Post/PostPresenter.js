@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Moment from "react-moment";
 
 const Container = styled.div`
   width: 60%;
@@ -16,7 +17,7 @@ const PostContainer = styled.div`
 `;
 
 const Posts = styled.div`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 200px;
   position: relative;
@@ -44,12 +45,14 @@ const CategoryContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
+const SearchBoxForm = styled.form`
+  width: 90%;
+`;
 const SearchBox = styled.input.attrs((props) => ({
   type: "text",
 }))`
   height: 40px;
-  width: 90%;
+  width: 100%;
   border: 3px solid blue;
   margin-bottom: 15px;
   &:focus {
@@ -77,7 +80,13 @@ const CategoryLi = styled.li`
   }
 `;
 
-const PostPresenter = ({ categoryHandler, category, post, paginator }) => {
+const PostPresenter = ({
+  categoryHandler,
+  category,
+  post,
+  paginator,
+  submitHandler,
+}) => {
   return (
     <Container>
       <PostContainer>
@@ -85,13 +94,20 @@ const PostPresenter = ({ categoryHandler, category, post, paginator }) => {
           <Posts key={p._id}>
             <PostTitle>{p.title}</PostTitle>
             <PostContent>{p.content.substring(0, 200)}...</PostContent>
-            <PostCreatedAt>{p.createdAt}</PostCreatedAt>
+            <PostCreatedAt>
+              <Moment format="YYYY년MM월DD일">{p.createdAt}</Moment>
+            </PostCreatedAt>
           </Posts>
         ))}
-        {paginator}
+        {post.length > 0 && paginator}
       </PostContainer>
       <CategoryContainer>
-        <SearchBox placeholder="검색할 글 제목을 입력하세요."></SearchBox>
+        <SearchBoxForm onSubmit={submitHandler}>
+          <SearchBox
+            id="searchbox"
+            placeholder="검색할 글 제목을 입력하세요."
+          ></SearchBox>
+        </SearchBoxForm>
         <Category>
           <CateogoryTitle>카테고리</CateogoryTitle>
           <CategoryUl>
