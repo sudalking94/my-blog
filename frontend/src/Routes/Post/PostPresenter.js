@@ -10,19 +10,35 @@ const Container = styled.div`
 `;
 
 const PostContainer = styled.div`
-  background-color: green;
   width: 100%;
-  height: 100%;
+  height: 90vh;
+  padding-top: 50px;
 `;
 
-const PostTitle = styled.div``;
+const Posts = styled.div`
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 200px;
+  position: relative;
+`;
 
-const Post = styled.div``;
+const PostTitle = styled.h2`
+  margin-bottom: 10px;
+`;
+
+const PostContent = styled.h5`
+  opacity: 0.7;
+`;
+
+const PostCreatedAt = styled.div`
+  position: absolute;
+  bottom: 40px;
+  opacity: 0.5;
+`;
 
 const CategoryContainer = styled.div`
-  background-color: yellow;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -54,34 +70,42 @@ const CateogoryTitle = styled.h3`
 const CategoryUl = styled.ul``;
 const CategoryLi = styled.li`
   width: fit-content;
+  margin-bottom: 5px;
   &:hover {
     opacity: 0.7;
     cursor: pointer;
   }
 `;
 
-const PostPresenter = (props) => {
-  console.log("Props", props);
+const PostPresenter = ({ categoryHandler, category, post, paginator }) => {
   return (
     <Container>
       <PostContainer>
-        <PostTitle></PostTitle>
-        <Post></Post>
+        {post.map((p) => (
+          <Posts key={p._id}>
+            <PostTitle>{p.title}</PostTitle>
+            <PostContent>{p.content.substring(0, 200)}...</PostContent>
+            <PostCreatedAt>{p.createdAt}</PostCreatedAt>
+          </Posts>
+        ))}
+        {paginator}
       </PostContainer>
       <CategoryContainer>
         <SearchBox placeholder="검색할 글 제목을 입력하세요."></SearchBox>
         <Category>
           <CateogoryTitle>카테고리</CateogoryTitle>
           <CategoryUl>
-            <CategoryLi onClick={props.categoryHandler}>
-              <i class="fas fa-caret-right"></i> asdasdasdsaaaaaaaaaaaaaaaaaaaa
+            <CategoryLi onClick={() => categoryHandler()}>
+              <i className="fas fa-caret-right"></i> All
             </CategoryLi>
-            <CategoryLi>
-              <i class="fas fa-caret-right"></i> asdasdasd
-            </CategoryLi>
-            <CategoryLi>
-              <i class="fas fa-caret-right"></i> asdasdasd
-            </CategoryLi>
+            {category.map((cty) => (
+              <CategoryLi
+                key={cty._id}
+                onClick={() => categoryHandler(cty._id)}
+              >
+                <i className="fas fa-caret-right"></i> {cty.title}
+              </CategoryLi>
+            ))}
           </CategoryUl>
         </Category>
       </CategoryContainer>

@@ -9,6 +9,8 @@ class Post(TimeStammpedModel):
     content = models.TextField(null=False, blank=False)
     category = models.ForeignKey("Category",on_delete=models.CASCADE,default=1)
 
+    class Meta:
+        ordering = ['-createdAt']
     def __str__(self):
         return self.title
 
@@ -26,6 +28,9 @@ class Category(TimeStammpedModel):
     _id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=10, null=False, blank=False, unique=True)    
 
+    class Meta:
+        ordering = ['title']
+        
     def __str__(self):
         return self.title
 
