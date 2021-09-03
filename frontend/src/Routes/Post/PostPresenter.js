@@ -4,7 +4,7 @@ import Moment from "react-moment";
 
 const Container = styled.div`
   width: 60%;
-  height: 100vh;
+  height: fit-content;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -12,7 +12,7 @@ const Container = styled.div`
 
 const PostContainer = styled.div`
   width: 100%;
-  height: 90vh;
+  height: fit-content;
   padding-top: 50px;
 `;
 
@@ -77,6 +77,8 @@ const CategoryLi = styled.li`
   &:hover {
     opacity: 0.7;
     cursor: pointer;
+    background-color: skyblue;
+    border-radius: 10px;
   }
 `;
 
@@ -86,22 +88,40 @@ const PostPresenter = ({
   post,
   paginator,
   submitHandler,
+  categoryId,
 }) => {
+  function changeColor(id) {
+    console.log("add", id);
+    document.getElementById(id).classList.add("category-title");
+  }
+  function removeColor(id) {
+    const removeId = document.getElementById(id);
+    const allId = document.getElementById("all");
+    if (removeId != null) {
+      console.log("remove", id);
+      removeId.classList.remove("category-title");
+    }
+    if (allId != null) {
+      allId.classList.remove("category-title");
+    }
+  }
   return (
-    <Container>
+    <Container className="board-container">
       <PostContainer>
         {post.map((p) => (
           <Posts key={p._id}>
-            <PostTitle>{p.title}</PostTitle>
-            <PostContent>{p.content.substring(0, 200)}...</PostContent>
-            <PostCreatedAt>
+            <PostTitle className="post-title">{p.title}</PostTitle>
+            <PostContent className="post-content">
+              {p.content.substring(0, 100)}...
+            </PostContent>
+            <PostCreatedAt className="createdAt">
               <Moment format="YYYY년MM월DD일">{p.createdAt}</Moment>
             </PostCreatedAt>
           </Posts>
         ))}
         {post.length > 0 && paginator}
       </PostContainer>
-      <CategoryContainer>
+      <CategoryContainer className="category-container">
         <SearchBoxForm onSubmit={submitHandler}>
           <SearchBox
             id="searchbox"
@@ -111,13 +131,25 @@ const PostPresenter = ({
         <Category>
           <CateogoryTitle>카테고리</CateogoryTitle>
           <CategoryUl>
-            <CategoryLi onClick={() => categoryHandler()}>
+            <CategoryLi
+              onClick={(e) => {
+                removeColor(categoryId);
+                changeColor(e.target.id);
+                categoryHandler();
+              }}
+              id="all"
+            >
               <i className="fas fa-caret-right"></i> All
             </CategoryLi>
             {category.map((cty) => (
               <CategoryLi
                 key={cty._id}
-                onClick={() => categoryHandler(cty._id)}
+                id={cty._id}
+                onClick={(e) => {
+                  removeColor(categoryId);
+                  changeColor(e.target.id);
+                  categoryHandler(cty._id);
+                }}
               >
                 <i className="fas fa-caret-right"></i> {cty.title}
               </CategoryLi>

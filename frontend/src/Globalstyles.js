@@ -32,6 +32,35 @@ const Globalstyles = createGlobalStyle`
     font-weight: 500;
   }
 
+  body * {
+  transition: 0.3s;
+  }
+
+  .category-title {
+    background-color: skyblue;
+    border-radius: 10px;
+  }
+  @media screen and (max-width: 800px) {
+    .board-container {
+      grid-template-columns: 1fr;
+      width: 100%;            
+    }
+
+    .category-container {
+      margin-top: 10px;
+      height: fit-content;            
+    }
+
+    .createdAt {
+      bottom: 5px;
+    }
+    .post-title {
+      font-size: 25px;
+    }
+    .post-content {
+      font-size: 15px;
+    }
+  }
 `;
 
 export default Globalstyles;

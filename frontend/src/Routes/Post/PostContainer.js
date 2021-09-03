@@ -81,6 +81,7 @@ const PostContainer = () => {
     <PostPresenter
       categoryHandler={categoryHandler}
       category={category}
+      categoryId={categoryId}
       post={post}
       page={page}
       submitHandler={submitHandler}
