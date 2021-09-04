@@ -40,6 +40,12 @@ const Globalstyles = createGlobalStyle`
     background-color: skyblue;
     border-radius: 10px;
   }
+
+  .popular-post {
+    &:hover {
+      background-color: #F7F7F7;
+    }
+  }
   @media screen and (max-width: 800px) {
     .board-container {
       grid-template-columns: 1fr;

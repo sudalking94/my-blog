@@ -13,6 +13,13 @@ class PostSerializer(serializers.ModelSerializer):
         serializer = CommentSerializer(comments, many=True)
         return serializer.data
 
+class PopularPostSerializer(serializers.ModelSerializer):    
+    class Meta:
+        model = Post
+        fields = ["_id","title","content","commentsCtn"]
+            
+    
+    
 
 class CategorySerializer(serializers.ModelSerializer):    
     class Meta:

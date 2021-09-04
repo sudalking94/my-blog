@@ -8,6 +8,7 @@ class Post(TimeStammpedModel):
     title = models.CharField(max_length=100, null=False, blank=False)    
     content = models.TextField(null=False, blank=False)
     category = models.ForeignKey("Category",on_delete=models.CASCADE,default=1)
+    commentsCtn = models.IntegerField()
 
     class Meta:
         ordering = ['-createdAt']

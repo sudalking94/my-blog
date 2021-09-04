@@ -103,9 +103,6 @@ export default withRouter(({ location: { pathname } }) => {
           <Item current={pathname === "/posts"}>
             <SLink to="/posts">공부흔적</SLink>
           </Item>
-          <Item current={pathname === "/projects"}>
-            <SLink to="/projects">프로젝트</SLink>
-          </Item>
         </List>
         <NavBarContainer onClick={navHandler}>
           <NavBarEach></NavBarEach>
@@ -119,13 +116,14 @@ export default withRouter(({ location: { pathname } }) => {
           <MobileHeader id="mobile-header">
             <MobileList>
               <MobileItem>
-                <SLink to="/">홈</SLink>
+                <SLink to="/" onClick={navHandler}>
+                  홈
+                </SLink>
               </MobileItem>
               <MobileItem>
-                <SLink to="/posts">공부흔적</SLink>
-              </MobileItem>
-              <MobileItem>
-                <SLink to="/projects">프로젝트</SLink>
+                <SLink to="/posts" onClick={navHandler}>
+                  공부흔적
+                </SLink>
               </MobileItem>
             </MobileList>
           </MobileHeader>

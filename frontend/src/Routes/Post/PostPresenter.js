@@ -17,7 +17,7 @@ const PostContainer = styled.div`
 `;
 
 const Posts = styled.div`
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
   width: 100%;
   height: 200px;
   position: relative;
@@ -109,7 +109,7 @@ const PostPresenter = ({
     <Container className="board-container">
       <PostContainer>
         {post.map((p) => (
-          <Posts key={p._id}>
+          <Posts className="popular-post" key={p._id}>
             <PostTitle className="post-title">{p.title}</PostTitle>
             <PostContent className="post-content">
               {p.content.substring(0, 100)}...
