@@ -7,7 +7,7 @@ const HomeContainer = () => {
 
   useEffect(() => {
     const posts = async () => {
-      const { data } = await axios.get(`/api/v1/posts/`);
+      const { data } = await axios.get(`/api/v1/posts/popular/`);
       setPost(data.posts);
     };
     posts();

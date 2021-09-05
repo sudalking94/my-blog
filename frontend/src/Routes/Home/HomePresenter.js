@@ -5,18 +5,19 @@ import { Link } from "react-router-dom";
 
 const HomeContainer = styled.div`
   padding-top: 50px;
+  height: 100vh;
   width: 60%;
   margin: 0 auto;
 
   @media screen and (max-width: 800px) {
     width: 100%;
+    height: fit-content;
   }
 `;
 
 const IntroContainer = styled.div`
   margin-top: 50px;
   display: flex;
-  border: 1px dashed black;
 `;
 
 const MyPic = styled.img`
@@ -51,7 +52,7 @@ const PopularPostContainer = styled.div`
 const PopularPosts = styled.div`
   border-top: 1px solid rgba(0, 0, 0, 0.2);
   width: 100%;
-  height: 200px;
+  height: 150px;
   position: relative;
 `;
 
@@ -63,10 +64,17 @@ const PopularPostContent = styled.h5`
   opacity: 0.7;
 `;
 
-const PopularPostCreatedAt = styled.div`
+const CommentsCount = styled.div`
   position: absolute;
-  bottom: 40px;
+  bottom: 10px;
   opacity: 0.5;
+`;
+const MoreReadContainer = styled.div`
+  margin: 10px 0;
+`;
+const MoreRead = styled(Link)`
+  color: skyblue;
+  text-decoration: none;
 `;
 
 const HomePresenter = ({ post }) => {
@@ -88,16 +96,22 @@ const HomePresenter = ({ post }) => {
       <PopularPostContainer>
         <h3>인기있는 글: top 3</h3>
         {post.map((p) => (
-          <PopularPosts className="popular-post" key={p._id}>
-            <PopularPostTitle className="post-title">
-              {p.title}
-            </PopularPostTitle>
-            <PopularPostContent className="post-content">
-              {p.content.substring(0, 100)}...
-            </PopularPostContent>
-          </PopularPosts>
+          <Link className="post-link" to={`/posts/${p._id}`} key={p._id}>
+            <PopularPosts className="popular-post">
+              <PopularPostTitle className="post-title">
+                {p.title}
+              </PopularPostTitle>
+              <PopularPostContent className="post-content">
+                {p.content.substring(0, 100)}...
+              </PopularPostContent>
+              <CommentsCount>댓글 {p.count_comments}</CommentsCount>
+            </PopularPosts>
+          </Link>
         ))}
       </PopularPostContainer>
+      <MoreReadContainer>
+        <MoreRead to="/posts">더 보기...</MoreRead>
+      </MoreReadContainer>
     </HomeContainer>
   );
 };

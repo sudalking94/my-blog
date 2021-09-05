@@ -3,31 +3,17 @@ import Navigation from "./components/Navigation";
 import BottomNavigation from "./components/BottomNavigation";
 import Globalstyles from "./Globalstyles";
 import Home from "./Routes/Home";
+import Posts from "./Routes/Posts";
 import Post from "./Routes/Post";
-import Page from "./Routes/Page";
 
 function App() {
   return (
     <>
       <Router>
         <Navigation />
-        <Route
-          path="/"
-          exact
-          render={(props) => (
-            <Page title="Home | J-Blog">
-              <Home></Home>
-            </Page>
-          )}
-        />
-        <Route
-          path="/posts"
-          render={(props) => (
-            <Page title="공부흔적 | J-Blog">
-              <Post></Post>
-            </Page>
-          )}
-        />
+        <Route path="/" exact component={Home} />
+        <Route path="/posts" exact component={Posts} />
+        <Route path="/posts/:id" component={Post} />
         <BottomNavigation />
       </Router>
       <Globalstyles />

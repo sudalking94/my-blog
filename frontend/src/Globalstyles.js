@@ -46,6 +46,11 @@ const Globalstyles = createGlobalStyle`
       background-color: #F7F7F7;
     }
   }
+
+  .post-link {
+    color: unset;
+  text-decoration: none;
+  }
   @media screen and (max-width: 800px) {
     .board-container {
       grid-template-columns: 1fr;
