@@ -32,7 +32,6 @@ const CreatedAt = styled.span`
 const PostContents = styled.p``;
 
 const PostPresenter = ({ post }) => {
-  console.log(post);
   return (
     <PostContainer>
       <PostTitle>{post.title}</PostTitle>

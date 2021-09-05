@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Category, PostComment
+from .models import Post, Category, Photo
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -24,13 +24,10 @@ class CategoryAdmin(admin.ModelAdmin):
         "updatedAt",
     )
 
-@admin.register(PostComment)
-class PostCommentAdmin(admin.ModelAdmin):
+@admin.register(Photo)
+class PhotosAdmin(admin.ModelAdmin):
     list_display = (
-        "post",
-        "title",
-        "createdAt",
-        "updatedAt",
+     "caption",
+     "createdAt",
+     "updatedAt",
     )
-    search_fields = ("post__title",)
-

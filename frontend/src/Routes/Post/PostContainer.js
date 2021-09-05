@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Comments from "../../components/Comments";
 import PostPresenter from "./PostPresenter";
 import axios from "axios";
 
@@ -16,7 +17,12 @@ const PostContainer = ({ match }) => {
     posts();
   }, [ID]);
 
-  return <PostPresenter post={post}></PostPresenter>;
+  return (
+    <>
+      <PostPresenter post={post}></PostPresenter>
+      <Comments></Comments>
+    </>
+  );
 };
 
 export default PostContainer;

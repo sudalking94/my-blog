@@ -71,7 +71,15 @@ const CateogoryTitle = styled.h3`
   margin-bottom: 20px;
 `;
 
-const CategoryUl = styled.ul``;
+const CategoryUl = styled.ul`
+  height: 500px;
+  overflow: scroll;
+
+  @media screen and (max-width: 800px) {
+    height: fit-content;
+    overflow: unset;
+  }
+`;
 const CategoryLi = styled.li`
   width: fit-content;
   margin-bottom: 5px;

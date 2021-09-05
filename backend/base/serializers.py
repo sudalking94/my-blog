@@ -1,26 +1,28 @@
 from django.db.models import fields
 from rest_framework import serializers
-from .models import Post, Category, PostComment
+from .models import Post, Category, Photo
 
-class PostSerializer(serializers.ModelSerializer):
-    comments = serializers.SerializerMethodField(read_only=True)
+class PostSerializer(serializers.ModelSerializer):    
+    photos = serializers.SerializerMethodField(read_only=True)
     class Meta:
         model = Post
         fields = "__all__"
-    
-    def get_comments(self,obj):
-        comments= obj.comments.all()        
-        serializer = CommentSerializer(comments, many=True)
+        
+    def get_photos(self,obj):
+        photos = obj.photos.all()
+        serializer = PhotoSerializer(photos,many=True)
         return serializer.data
 
-class PopularPostSerializer(serializers.ModelSerializer):      
+class PostsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ["_id","title","content","count_comments"]
-        
-            
-    
-    
+        fields = "__all__"
+
+class MainPostsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = "__all__"
+
 
 class CategorySerializer(serializers.ModelSerializer):    
     class Meta:
@@ -28,8 +30,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ["_id","title"]
     
 
-
-class CommentSerializer(serializers.ModelSerializer):
+class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = PostComment
+        model = Photo
         fields = "__all__"        
