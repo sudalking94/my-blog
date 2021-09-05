@@ -9,14 +9,15 @@ class PostSerializer(serializers.ModelSerializer):
         fields = "__all__"
     
     def get_comments(self,obj):
-        comments= obj.postcomment_set.all()        
+        comments= obj.comments.all()        
         serializer = CommentSerializer(comments, many=True)
         return serializer.data
 
-class PopularPostSerializer(serializers.ModelSerializer):    
+class PopularPostSerializer(serializers.ModelSerializer):      
     class Meta:
         model = Post
-        fields = ["_id","title","content","commentsCtn"]
+        fields = ["_id","title","content","count_comments"]
+        
             
     
     

@@ -1,4 +1,5 @@
 from django.core import paginator
+from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -35,7 +36,7 @@ def getPosts(request):
 
 @api_view(["GET"])
 def getPopularPosts(request):
-    posts = Post.objects.all().order_by("-commentsCtn")
+    posts = Post.objects.annotate(commentsCtn=Count('comments__post')).order_by('-commentsCtn')
     serializer = PopularPostSerializer(posts, many=True)
     return Response({
         "posts":serializer.data[:3]
