@@ -7,6 +7,7 @@ const PostContainer = styled.div`
   padding-top: 50px;
   width: 50%;
   margin: 0 auto;
+  border-bottom: 1px solid gray;
 
   @media screen and (max-width: 800px) {
     width: 100%;
@@ -43,13 +44,19 @@ const PhotoCaption = styled.h3`
 
 const PhotoImg = styled.div`
   background-image: url(${(props) => props.bgUrl});
-  height: 180px;
-  background-size: cover;
-  border-radius: 4px;
+  height: 400px;
+  background-size: contain;
+  background-repeat: no-repeat;
   background-position: center center;
+
+  @media screen and (max-width: 800px) {
+    height: 300px;
+  }
 `;
 
-const PhotoDescription = styled.div``;
+const PhotoDescription = styled.div`
+  padding-top: 10px;
+`;
 
 const PostPresenter = ({ post, photos }) => {
   return (
@@ -63,7 +70,7 @@ const PostPresenter = ({ post, photos }) => {
         {photos.map((photo) => (
           <PhotoContainer key={photo.id}>
             <PhotoCaption>{photo.caption}</PhotoCaption>
-            <PhotoImg bgUrl={`${BASE_URL}${photo.file}`}></PhotoImg>
+            <PhotoImg bgUrl={`${BASE_URL}${photo.file}`} />
             <PhotoDescription
               dangerouslySetInnerHTML={{ __html: photo.content }}
             />
