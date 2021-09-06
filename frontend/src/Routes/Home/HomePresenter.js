@@ -113,6 +113,10 @@ const MoreRead = styled(Link)`
 `;
 
 const HomePresenter = ({ post, category, categoryHandler, categoryId }) => {
+  const removeTag = (content) => {
+    const regex = /(<([^>]+)>)/gi;
+    return content.replace(regex, "");
+  };
   function changeColor(id) {
     const Eid = document.getElementById(id);
     Eid.style.backgroundColor = "skyblue";
@@ -173,7 +177,7 @@ const HomePresenter = ({ post, category, categoryHandler, categoryId }) => {
             <Posts className="popular-post">
               <PostTitle className="post-title">{p.title}</PostTitle>
               <PostContent className="post-content">
-                {p.content.substring(0, 100)}...
+                {removeTag(p.content).toString().substring(0, 100)}...
               </PostContent>
               <PostCreatedAt className="createdAt">
                 <Moment format="YYYY년MM월DD일">{p.createdAt}</Moment>

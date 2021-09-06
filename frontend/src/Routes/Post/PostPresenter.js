@@ -1,17 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import Moment from "react-moment";
+import { BASE_URL } from "../../constants/urls";
 
 const PostContainer = styled.div`
   padding-top: 50px;
-  height: 100vh;
   width: 50%;
   margin: 0 auto;
-  border: 1px dashed black;
 
   @media screen and (max-width: 800px) {
     width: 100%;
-    height: fit-content;
   }
 `;
 
@@ -29,16 +27,49 @@ const CreatedAt = styled.span`
   font-size: smaller;
 `;
 
-const PostContents = styled.p``;
+const PostContents = styled.p`
+  padding: 100px 0;
+`;
+const Section = styled.div``;
 
-const PostPresenter = ({ post }) => {
+const PhotoContainer = styled.div`
+  margin-bottom: 100px;
+`;
+
+const PhotoCaption = styled.h3`
+  text-align: center;
+  margin-bottom: 10px;
+`;
+
+const PhotoImg = styled.div`
+  background-image: url(${(props) => props.bgUrl});
+  height: 180px;
+  background-size: cover;
+  border-radius: 4px;
+  background-position: center center;
+`;
+
+const PhotoDescription = styled.div``;
+
+const PostPresenter = ({ post, photos }) => {
   return (
     <PostContainer>
       <PostTitle>{post.title}</PostTitle>
       <CreatedAt>
         <Moment format="YYYY년 MM월 DD일">{post.createdAt}</Moment>
       </CreatedAt>
-      <PostContents>{post.content}</PostContents>
+      <PostContents dangerouslySetInnerHTML={{ __html: post.content }} />
+      <Section>
+        {photos.map((photo) => (
+          <PhotoContainer key={photo.id}>
+            <PhotoCaption>{photo.caption}</PhotoCaption>
+            <PhotoImg bgUrl={`${BASE_URL}${photo.file}`}></PhotoImg>
+            <PhotoDescription
+              dangerouslySetInnerHTML={{ __html: photo.content }}
+            />
+          </PhotoContainer>
+        ))}
+      </Section>
     </PostContainer>
   );
 };

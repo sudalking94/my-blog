@@ -6,6 +6,7 @@ import axios from "axios";
 const PostContainer = ({ match }) => {
   const ID = match.params.id;
   const [post, setPost] = useState([]);
+  const [photos, setPhosts] = useState([]);
 
   useEffect(() => {
     const posts = async () => {
@@ -13,13 +14,14 @@ const PostContainer = ({ match }) => {
         data: { post: p },
       } = await axios.get(`/api/v1/posts/${ID}`);
       setPost(p);
+      setPhosts(p.photos);
     };
     posts();
   }, [ID]);
 
   return (
     <>
-      <PostPresenter post={post}></PostPresenter>
+      <PostPresenter post={post} photos={photos}></PostPresenter>
       <Comments></Comments>
     </>
   );

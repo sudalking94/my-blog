@@ -8,6 +8,7 @@ django = "*"
 django-seed = "*"
 djangorestframework = "*"
 pillow = "*"
+django-tinymce = "*"
 
 [dev-packages]
 

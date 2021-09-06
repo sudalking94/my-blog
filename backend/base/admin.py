@@ -27,7 +27,9 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Photo)
 class PhotosAdmin(admin.ModelAdmin):
     list_display = (
+     "post",
      "caption",
      "createdAt",
      "updatedAt",
-    )
+    )    
+    search_fields = ("post__title",)
