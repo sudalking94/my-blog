@@ -73,7 +73,7 @@ const MyIntroContents = styled.p`
   font-size: smaller;
 `;
 
-const SocialLink = styled(Link)`
+const SocialLink = styled.a`
   width: fit-content;
 `;
 
@@ -138,10 +138,7 @@ const HomePresenter = ({ post, category, categoryHandler, categoryId }) => {
         <MyIntro>
           <h5>안녕하세요. 개발자 전준우 입니다.</h5>
           <MyIntroContents>공부한 것들을 기록하는 공간입니다.</MyIntroContents>
-          <SocialLink
-            target="_blank"
-            to={{ pathname: "https://github.com/sudalking94" }}
-          >
+          <SocialLink target="_blank" href="https://github.com/sudalking94">
             <i className="fab fa-github fa-lg"></i>
           </SocialLink>
         </MyIntro>
