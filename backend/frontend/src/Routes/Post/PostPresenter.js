@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Moment from "react-moment";
-import { BASE_URL } from "../../constants/urls";
 
 const PostContainer = styled.div`
   padding-top: 50px;
@@ -44,13 +43,13 @@ const PhotoCaption = styled.h3`
 
 const PhotoImg = styled.div`
   background-image: url(${(props) => props.bgUrl});
-  height: 400px;
+  height: 300px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
 
   @media screen and (max-width: 800px) {
-    height: 300px;
+    height: 250px;
   }
 `;
 
@@ -70,7 +69,7 @@ const PostPresenter = ({ post, photos }) => {
         {photos.map((photo) => (
           <PhotoContainer key={photo.id}>
             <PhotoCaption>{photo.caption}</PhotoCaption>
-            <PhotoImg bgUrl={`${BASE_URL}${photo.file}`} />
+            <PhotoImg bgUrl={`${photo.file}`} />
             <PhotoDescription
               dangerouslySetInnerHTML={{ __html: photo.content }}
             />
