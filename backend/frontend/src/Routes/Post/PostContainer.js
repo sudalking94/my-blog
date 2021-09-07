@@ -3,21 +3,28 @@ import Comments from "../../components/Comments";
 import PostPresenter from "./PostPresenter";
 import axios from "axios";
 
-const PostContainer = ({ match }) => {
-  const ID = match.params.id;
+const PostContainer = ({ match, history }) => {
+  const ID = parseInt(match.params.id);
   const [post, setPost] = useState([]);
   const [photos, setPhosts] = useState([]);
 
   useEffect(() => {
+    if (isNaN(ID)) {
+      return history.push("/");
+    }
     const posts = async () => {
-      const {
-        data: { post: p },
-      } = await axios.get(`/api/v1/posts/${ID}`);
-      setPost(p);
-      setPhosts(p.photos);
+      try {
+        const {
+          data: { post: p },
+        } = await axios.get(`/api/v1/posts/${ID}`);
+        setPost(p);
+        setPhosts(p.photos);
+      } catch (error) {
+        return history.push("/");
+      }
     };
     posts();
-  }, [ID]);
+  }, [ID, history]);
 
   return (
     <>

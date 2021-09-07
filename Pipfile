@@ -9,6 +9,8 @@ django-seed = "*"
 djangorestframework = "*"
 pillow = "*"
 django-tinymce = "*"
+psycopg2 = "*"
+django-dotenv = "*"
 
 [dev-packages]
 

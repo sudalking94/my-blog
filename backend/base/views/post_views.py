@@ -1,8 +1,9 @@
 from django.core import paginator
-from django.db.models import Count
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework import status
 from base.serializers import PostSerializer,PostsSerializer, MainPostsSerializer
 from base.models import Post
 
@@ -36,7 +37,11 @@ def getPosts(request):
 
 @api_view(["GET"])
 def getPostById(request, pk):
-    post = Post.objects.get(_id=pk)
+    try:    
+        post = Post.objects.get(_id=pk)
+    except ObjectDoesNotExist:
+        message = {"detail": "Does not exist"}
+        return Response(message,status=status.HTTP_400_BAD_REQUEST)
     serializer = PostSerializer(post, many=False)    
     return Response(
         {"post":serializer.data}

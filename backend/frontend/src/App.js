@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Route,
+  Redirect,
+  Switch,
+} from "react-router-dom";
 import Navigation from "./components/Navigation";
 import BottomNavigation from "./components/BottomNavigation";
 import Globalstyles from "./Globalstyles";
@@ -11,9 +16,12 @@ function App() {
     <>
       <Router>
         <Navigation />
-        <Route path="/" exact component={Home} />
-        <Route path="/posts" exact component={Posts} />
-        <Route path="/posts/:id" component={Post} />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/posts" exact component={Posts} />
+          <Route path="/posts/:id" component={Post} />
+          <Redirect from="*" to="/" />
+        </Switch>
         <BottomNavigation />
       </Router>
       <Globalstyles />

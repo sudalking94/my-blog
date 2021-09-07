@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get("LOCAL_DB_NAME"),
+        'USER': os.environ.get("LOCAL_DB_USER"),
+        'PASSWORD': os.environ.get("LOCAL_DB_PASSWORD"),
+        'HOST': os.environ.get("LOCAL_DB_HOST"),
+        'PORT': os.environ.get("PORT"),
     }
 }
 
@@ -139,4 +143,4 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS_ALLOW_ALL_ORIGINS 왜 있는지 모름 안해도 작동됨
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
